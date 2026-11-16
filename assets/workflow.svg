@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="400" viewBox="0 0 960 400" role="img" aria-labelledby="title desc">
+  <title id="title">SQL Agent RL 交互与训练流程</title>
+  <desc id="desc">模型从问题和数据库结构生成最终 SQL，或执行中间 SQL 并读取反馈。完整轨迹与终局奖励用于更新模型。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="#7389a0"/></marker>
+    <marker id="green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 10 5 0 10z" fill="#328375"/></marker>
+    <style>
+      text{font-family:system-ui,-apple-system,'Segoe UI','Microsoft YaHei',sans-serif;fill:#20394f}
+      .box{stroke:#cad9e5;fill:#f4f7fb}.node{font-size:19px;font-weight:600;text-anchor:middle}
+      .route{fill:none;stroke:#7389a0;stroke-width:2.2;stroke-linejoin:round;marker-end:url(#arrow)}
+      .train{fill:none;stroke:#328375;stroke-width:2.2;marker-end:url(#green)}
+      .note{font-size:14px;fill:#536c81}
+    </style>
+  </defs>
+  <rect width="960" height="400" rx="16" fill="#f5f8fb"/>
+  <rect x="16" y="14" width="928" height="233" rx="15" fill="white" stroke="#d5e1ec"/>
+  <rect x="16" y="281" width="928" height="103" rx="15" fill="#f8fcfa" stroke="#c9e2da"/>
+  <text x="38" y="48" font-size="21" font-weight="700">Agent 交互</text>
+  <text x="919" y="48" text-anchor="end" class="note">LangGraph · SQLite</text>
+  <g>
+    <rect class="box" x="48" y="75" width="190" height="56" rx="11"/>
+    <rect x="362" y="75" width="218" height="56" rx="11" fill="#eaf2ff" stroke="#a8c6ed"/>
+    <rect class="box" x="715" y="75" width="190" height="56" rx="11"/>
+    <text class="node" x="143" y="110">问题 + Schema</text>
+    <text class="node" x="471" y="110">模型生成</text>
+    <text class="node" x="810" y="110">最终 SQL</text>
+    <path class="route" d="M238 103H359"/><path class="route" d="M580 103H712"/>
+    <rect class="box" x="377" y="167" width="188" height="50" rx="11"/>
+    <rect class="box" x="48" y="167" width="190" height="50" rx="11"/>
+    <text class="node" x="471" y="199">执行中间 SQL</text>
+    <text class="node" x="143" y="199">结果 / 报错</text>
+    <path class="route" d="M471 131V165"/><path class="route" d="M377 192H240"/>
+    <path class="route" d="M143 167V146H387V133"/>
+    <text class="note" x="487" y="154">按需探查</text>
+  </g>
+  <text x="38" y="309" font-size="19" font-weight="700">轨迹训练</text>
+  <path class="train" d="M471 247V324"/><path class="route" d="M810 131V324"/>
+  <text class="note" x="482" y="270">保存完整交互</text>
+  <rect x="48" y="327" width="190" height="42" rx="10" fill="#e5f4ef" stroke="#a4d3c6"/>
+  <rect x="362" y="327" width="218" height="42" rx="10" fill="#e5f4ef" stroke="#a4d3c6"/>
+  <rect x="715" y="327" width="190" height="42" rx="10" fill="#fff4df" stroke="#e6c88c"/>
+  <text class="node" x="143" y="355">GRPO 参数更新</text>
+  <text class="node" x="471" y="355">轨迹与组内优势</text>
+  <text class="node" x="810" y="355">终局奖励</text>
+  <path class="train" d="M362 348H240"/><path class="train" d="M715 348H582"/>
+</svg>
