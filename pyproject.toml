@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "spider-sql-agent"
 version = "0.1.0"
 requires-python = ">=3.11"
-dependencies = ["langgraph==1.0.4", "httpx==0.28.1"]
+dependencies = ["langgraph==1.0.10rc1", "httpx==0.28.1"]
 
 [project.optional-dependencies]
 training = ["agentlightning==0.3.1", "verl==0.6.1", "torch", "transformers==4.57.1", "omegaconf==2.3.0"]
